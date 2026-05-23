@@ -1,0 +1,16 @@
+# Boot Dashboard dependencies
+# v1 MVP uses tkinter (stdlib — no install) + Google Calendar libs (added in Phase 4)
+#
+# Add libraries to this file as you install them in your venv:
+#   pip install <library>
+#   pip freeze > requirements.txt
+#
+# Anyone (including future-you on a new machine) can then reproduce the env with:
+#   python -m venv venv
+#   .\venv\Scripts\Activate.ps1
+#   pip install -r requirements.txt
+#
+# v1 expected additions (Phase 4):
+#   google-api-python-client
+#   google-auth-httplib2
+#   google-auth-oauthlib
