@@ -2,6 +2,7 @@
 import tkinter as tk
 from datetime import date
 from calendar_client import get_todays_events
+from hours import load_hours
 
 SHIP_OR_PARK = date(2026, 5, 26)
 
@@ -29,11 +30,28 @@ def build_header(parent: tk.Misc) -> tk.Frame:
 def build_today(parent: tk.Misc) -> tk.Frame:
     """Today's calendar events section: section header + one Label per event"""
     frame = tk.Frame(parent)
+
     date_label = tk.Label(frame, text="Today", font=("consolas", 20,))
     date_label.pack()
+
     events = get_todays_events()
     for event in events:
         tk.Label(frame, text=event["summary"], font=("Consolas", 14)).pack()
+    return frame
+
+def build_hours(parent: tk.Misc) -> tk.Frame:
+    """Weekly hours section: Py, Pj, Fi progress with pace coloring"""
+
+    frame = tk.Frame(parent)
+
+    date_label = tk.Label(frame, text="This Week", font=("Consolas", 20)).pack()
+
+    hours = load_hours()
+
+    py_label = tk.Label(frame, text=f"Py: {hours['logged']['py']} / {hours['targets']['py']}", font=("Consolas", 20)).pack()
+    pj_label = tk.Label(frame, text=f"Pj: {hours['logged']['pj']} / {hours['targets']['pj']}", font=("Consolas", 20)).pack()
+    fi_label = tk.Label(frame, text=f"Fi: {hours['logged']['fi']} / {hours['targets']['fi']}", font=("Consolas", 20)).pack()
+
     return frame
 
 def main() -> None:
@@ -43,8 +61,12 @@ def main() -> None:
 
     header = build_header(root)
     header.pack(pady=40)
+
     today_frame = build_today(root)
     today_frame.pack(pady=20)
+
+    hours_frame = build_hours(root)
+    hours_frame.pack(pady=20)
 
     root.mainloop()
 
