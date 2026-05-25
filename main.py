@@ -31,6 +31,9 @@ def build_today(parent: tk.Misc) -> tk.Frame:
     frame = tk.Frame(parent)
     date_label = tk.Label(frame, text="Today", font=("consolas", 20,))
     date_label.pack()
+    events = get_todays_events()
+    for event in events:
+        tk.Label(frame, text=event["summary"], font=("Consolas", 14)).pack()
     return frame
 
 def main() -> None:
