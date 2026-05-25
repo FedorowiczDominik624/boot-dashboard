@@ -2,7 +2,7 @@
 import tkinter as tk
 from datetime import date
 from calendar_client import get_todays_events
-from hours import load_hours
+from hours import load_hours, is_behind_pace
 
 SHIP_OR_PARK = date(2026, 5, 26)
 
@@ -48,9 +48,33 @@ def build_hours(parent: tk.Misc) -> tk.Frame:
 
     hours = load_hours()
 
-    py_label = tk.Label(frame, text=f"Py: {hours['logged']['py']} / {hours['targets']['py']}", font=("Consolas", 20)).pack()
-    pj_label = tk.Label(frame, text=f"Pj: {hours['logged']['pj']} / {hours['targets']['pj']}", font=("Consolas", 20)).pack()
-    fi_label = tk.Label(frame, text=f"Fi: {hours['logged']['fi']} / {hours['targets']['fi']}", font=("Consolas", 20)).pack()
+    days_of_week = date.today().isoweekday()
+
+    py_logged = hours["logged"]["py"]
+    py_targets = hours["targets"]["py"]
+    pj_logged = hours["logged"]["pj"]
+    pj_targets = hours["targets"]["pj"]
+    fi_logged = hours["logged"]["fi"]
+    fi_targets = hours["targets"]["fi"]
+
+    if is_behind_pace(py_logged, py_targets, days_of_week):
+        py_color = "red"
+    else:
+        py_color = "green"
+    if is_behind_pace(pj_logged, pj_targets, days_of_week):
+        pj_color = "red"
+    else:
+        pj_color = "green"
+    if is_behind_pace(fi_logged, fi_targets, days_of_week):
+        fi_color = "red"
+    else:
+        fi_color = "green"
+
+    
+
+    py_label = tk.Label(frame, text=f"Py: {hours['logged']['py']} / {hours['targets']['py']}", fg=py_color, font=("Consolas", 20)).pack()
+    pj_label = tk.Label(frame, text=f"Pj: {hours['logged']['pj']} / {hours['targets']['pj']}", fg=pj_color, font=("Consolas", 20)).pack()
+    fi_label = tk.Label(frame, text=f"Fi: {hours['logged']['fi']} / {hours['targets']['fi']}", fg=fi_color, font=("Consolas", 20)).pack()
 
     return frame
 
