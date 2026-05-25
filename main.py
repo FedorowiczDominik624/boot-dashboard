@@ -1,6 +1,7 @@
 """Boot Dashboard — entry point."""
 import tkinter as tk
 from datetime import date
+from calendar_client import get_todays_events
 
 SHIP_OR_PARK = date(2026, 5, 26)
 
@@ -25,6 +26,12 @@ def build_header(parent: tk.Misc) -> tk.Frame:
 
     return frame
 
+def build_today(parent: tk.Misc) -> tk.Frame:
+    """Today's calendar events section: section header + one Label per event"""
+    frame = tk.Frame(parent)
+    date_label = tk.Label(frame, text="Today", font=("consolas", 20,))
+    date_label.pack()
+    return frame
 
 def main() -> None:
     root = tk.Tk()
@@ -33,9 +40,10 @@ def main() -> None:
 
     header = build_header(root)
     header.pack(pady=40)
+    today_frame = build_today(root)
+    today_frame.pack(pady=20)
 
     root.mainloop()
-
 
 if __name__ == "__main__":
     main()
