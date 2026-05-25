@@ -3,6 +3,7 @@ import tkinter as tk
 from datetime import date
 from calendar_client import get_todays_events
 from hours import load_hours, is_behind_pace
+from links import open_vault, open_github, open_satellite
 
 SHIP_OR_PARK = date(2026, 5, 26)
 
@@ -78,6 +79,20 @@ def build_hours(parent: tk.Misc) -> tk.Frame:
 
     return frame
 
+def build_buttons(parent: tk.Misc) -> tk.Frame:
+    """Quick launch row: 3 buttons side by side."""
+    frame = tk.Frame(parent)
+
+    button1 = tk.Button(frame, text="Open Vault", command=open_vault)
+    button2 = tk.Button(frame, text="Open GitHub", command=open_github)
+    button3 = tk.Button(frame, text="Open Satellite", command=open_satellite)
+
+    button1.pack( side="left", expand=True, fill="x")
+    button2.pack( side="left", expand=True, fill="x")
+    button3.pack( side="left", expand=True, fill="x")
+
+    return frame
+
 def main() -> None:
     root = tk.Tk()
     root.title("Boot Dashboard")
@@ -91,6 +106,9 @@ def main() -> None:
 
     hours_frame = build_hours(root)
     hours_frame.pack(pady=20)
+
+    buttons_frame = build_buttons(root)
+    buttons_frame.pack(pady=20, fill="x", padx=40)
 
     root.mainloop()
 
