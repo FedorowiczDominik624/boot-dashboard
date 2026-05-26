@@ -1,4 +1,5 @@
-@echo off
-cd  c:\Users\domin\Code\boot-dashboard
+cd c:\Users\domin\Code\boot-dashboard
 call venv\Scripts\activate.bat
-python main.py
+where pythonw
+pythonw launcher.py
+pause
