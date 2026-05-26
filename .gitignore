@@ -30,3 +30,6 @@ Thumbs.db
 *.egg-info/
 dist/
 build/
+
+# Debug logs (pythonw runtime error capture)
+pythonw_error.log

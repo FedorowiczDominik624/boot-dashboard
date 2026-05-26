@@ -104,3 +104,6 @@ To disable auto-launch later, just delete the shortcut from the Startup folder. 
 - **Per-project status** pulled live from each project's `CLAUDE.md`.
 - **Browser-based version (Flask)** for cross-device access.
 
+## License
+
+[MIT](LICENSE) © 2026 Dominik Fedorowicz
