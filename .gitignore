@@ -17,6 +17,9 @@ credentials.json
 # Personal data (your weekly hour log)
 hours.json
 
+# SQLite databases (regeneratable from schema + migration)
+*.db
+
 # Editor / IDE
 .vscode/
 .idea/
