@@ -27,12 +27,21 @@ def load_hours(json_path: str) -> pd.DataFrame:
     df = pd.DataFrame(rows)
     return df
 
+def add_progress_column(hours_df: pd.DataFrame) -> pd.DataFrame:
+    """Add 'delta' and 'pct_of_target' columns to hours DataFrame."""
+    hours_df['delta'] = hours_df['logged'] - hours_df['targets']
+    hours_df['pct_of_target'] = hours_df['logged'] / hours_df['targets'] * 100
+    return hours_df
+
+
 if __name__ == "__main__":
     result = load_targets("boot_dashboard.db")
     hours_df = load_hours("hours.json")
+    progress_df = add_progress_column(hours_df)
     print(result)
     print(result.shape)
     print(result.dtypes)
     print(hours_df)
     print(hours_df.shape)
     print(hours_df.dtypes)
+    print(progress_df)
